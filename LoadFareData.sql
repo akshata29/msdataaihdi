@@ -1,0 +1,12 @@
+LOAD DATA INPATH '/nyctaxiraw/fare/trip_fare_1.csv' INTO TABLE nyctaxidb.fare PARTITION (month=1);
+LOAD DATA INPATH '/nyctaxiraw/fare/trip_fare_2.csv' INTO TABLE nyctaxidb.fare PARTITION (month=2);
+LOAD DATA INPATH '/nyctaxiraw/fare/trip_fare_3.csv' INTO TABLE nyctaxidb.fare PARTITION (month=3);
+LOAD DATA INPATH '/nyctaxiraw/fare/trip_fare_4.csv' INTO TABLE nyctaxidb.fare PARTITION (month=4);
+LOAD DATA INPATH '/nyctaxiraw/fare/trip_fare_5.csv' INTO TABLE nyctaxidb.fare PARTITION (month=5);
+LOAD DATA INPATH '/nyctaxiraw/fare/trip_fare_6.csv' INTO TABLE nyctaxidb.fare PARTITION (month=6);
+LOAD DATA INPATH '/nyctaxiraw/fare/trip_fare_7.csv' INTO TABLE nyctaxidb.fare PARTITION (month=7);
+LOAD DATA INPATH '/nyctaxiraw/fare/trip_fare_8.csv' INTO TABLE nyctaxidb.fare PARTITION (month=8);
+LOAD DATA INPATH '/nyctaxiraw/fare/trip_fare_9.csv' INTO TABLE nyctaxidb.fare PARTITION (month=9);
+LOAD DATA INPATH '/nyctaxiraw/fare/trip_fare_10.csv' INTO TABLE nyctaxidb.fare PARTITION (month=10);
+LOAD DATA INPATH '/nyctaxiraw/fare/trip_fare_11.csv' INTO TABLE nyctaxidb.fare PARTITION (month=11);
+LOAD DATA INPATH '/nyctaxiraw/fare/trip_fare_12.csv' INTO TABLE nyctaxidb.fare PARTITION (month=12);

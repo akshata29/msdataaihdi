@@ -1,1 +1,0 @@
-SELECT COUNT(*) FROM criteo.criteo_train;
