@@ -26,13 +26,12 @@ Azure HDInsight is a cloud service that allows cost-effective data processing us
 - Data and AI sales
 
 # Technologies 
-	• Kafka on HDInsight 
-	• Spark on HDInsight
-	• Machine learning /R serve on HDInsight
-	• Azure Machine learning 
-	• PowerBI 
-	• Vnets 
-	• Azure storage 
+- HDInsight - Kafka
+- HDInsight – Machine Learning/R Server
+- HDInsight – Spark
+- Azure Machine Learning
+- Power BI
+- Azure Data Lake
 
 # Objective
 ## Business Objectives 
