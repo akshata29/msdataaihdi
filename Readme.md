@@ -20,10 +20,10 @@ Azure HDInsight is a cloud service that allows cost-effective data processing us
 
 
 # Target Audience
-Data Engineers 
-Data analysts 
-Machine learning engineers
-Data and AI sales
+- Data Engineers 
+- Data analysts 
+- Machine learning engineers
+- Data and AI sales
 
 # Technologies 
 	• Kafka on HDInsight 
