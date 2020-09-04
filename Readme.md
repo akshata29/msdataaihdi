@@ -11,7 +11,7 @@
 
 [Workshop Architecture and Overview](#workshop-architecture-and-overview)
    
-   
+[Special Thanks](#special-thanks)   
 
  # Abstract
 Big data analytics has evolved rapidly in the last decade. This evolution has also transpired a innovation in tooling resulting a large set of tools available for the enterprise data analytics and management teams. As part of highlighting the key pros and limitation in a tool chain, this particular workshop will focus on HDInsight has a central component of the design. At the end of the workshop the participants will be able to understand and implement simple end to end data analytics design using HDInsight and supported tooling. Further, this experience will help participants both Sales representatives and customers to identify workloads that might suit HDInsight and perform quick Demos/POCs. 
@@ -1718,3 +1718,9 @@ HDInsight cluster. And any other resources associated with the resource group.
     the **More** button (...) on the right side of the listing.
 
 -   Select **Delete resource group**, and then confirm.
+
+# Special Thanks
+- [Shekhar Kumar](https://github.com/shkumar64)
+- [Sha Kanjoor Anand](https://github.com/shakanand)
+- [Shashi Bhusan]
+- [Arunansu Pattanayak](https://github.com/arunansu)
