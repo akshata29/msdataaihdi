@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "6e69693f-8f00-49e1-8bc5-c3963783021c",
+		"name": "HDInsight",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All Hdi Clusters - Subscription",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyIsImtpZCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuYXp1cmUuY29tLyIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0Lzg1OTc2ZGYzLTIxYWUtNDAyMC05M2NhLTUxMzc2MWFhZTI4Yi8iLCJpYXQiOjE2MDA5MDIzMjAsIm5iZiI6MTYwMDkwMjMyMCwiZXhwIjoxNjAwOTA2MjIwLCJhaW8iOiJFMlJnWUhpczF1RjRRVnlsd28vMU92L1BZN1h2QVE9PSIsImFwcGlkIjoiYzkwODcyMjMtMDM3NS00YmI2LWJkMzgtNmNhNTIwMmMzY2U5IiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvODU5NzZkZjMtMjFhZS00MDIwLTkzY2EtNTEzNzYxYWFlMjhiLyIsIm9pZCI6IjE4NzUwZjBlLWIzZWYtNGQ5Zi04YWM0LTk0ZTA1ZDdmMzM3MCIsInJoIjoiMC5BQUFBODIyWGhhNGhJRUNUeWxFM1lhcmlpeU55Q01sMUE3Wkx2VGhzcFNBc1BPa1NBQUEuIiwic3ViIjoiMTg3NTBmMGUtYjNlZi00ZDlmLThhYzQtOTRlMDVkN2YzMzcwIiwidGlkIjoiODU5NzZkZjMtMjFhZS00MDIwLTkzY2EtNTEzNzYxYWFlMjhiIiwidXRpIjoicTFJYUhHUTJaRU9Penl3VEV4cHRBQSIsInZlciI6IjEuMCIsInhtc190Y2R0IjoxMzg0OTY4OTc4fQ.srs9TB3X3AVq8DmJc71DGsC6X42Qej5fZrpR3XgWM9NA1Lpuza2qih3c9UJ6Aqoy2xsucnpGGoYP5geEDgQ8tr634v5XQM8aKb2dMwv0dzK9gR1Ru2GTv28XAczj07ADQL5g0rEascFH1IC-SEQPbwnPTAnN8lc2mWchD4OKv9llIj0QY4VI7XTQ-9LXnJmveCrQs7RzAS-a02CGALH5tjvEgw57MeTZSsbHh70ObN93tpVsJ3yH1XP4aiOhEUpRMKbweZlBYyCfKHcSXWAZihsQ3iUZmn-WhRcAjbPfN41Dea0FFSK70RdSuuC0iU_vWFiJDx8bsS0ap0yRFKvxSA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://management.azure.com/subscriptions/e24382eb-137e-4f22-9b95-42dd080d8a79/providers/Microsoft.HDInsight/clusters?api-version=2018-06-01-preview",
+					"protocol": "https",
+					"host": [
+						"management",
+						"azure",
+						"com"
+					],
+					"path": [
+						"subscriptions",
+						"e24382eb-137e-4f22-9b95-42dd080d8a79",
+						"providers",
+						"Microsoft.HDInsight",
+						"clusters"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2018-06-01-preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Specific Hdi Clusters - Resource group",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyIsImtpZCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuYXp1cmUuY29tLyIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0Lzg1OTc2ZGYzLTIxYWUtNDAyMC05M2NhLTUxMzc2MWFhZTI4Yi8iLCJpYXQiOjE2MDA5MDIzMjAsIm5iZiI6MTYwMDkwMjMyMCwiZXhwIjoxNjAwOTA2MjIwLCJhaW8iOiJFMlJnWUhpczF1RjRRVnlsd28vMU92L1BZN1h2QVE9PSIsImFwcGlkIjoiYzkwODcyMjMtMDM3NS00YmI2LWJkMzgtNmNhNTIwMmMzY2U5IiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvODU5NzZkZjMtMjFhZS00MDIwLTkzY2EtNTEzNzYxYWFlMjhiLyIsIm9pZCI6IjE4NzUwZjBlLWIzZWYtNGQ5Zi04YWM0LTk0ZTA1ZDdmMzM3MCIsInJoIjoiMC5BQUFBODIyWGhhNGhJRUNUeWxFM1lhcmlpeU55Q01sMUE3Wkx2VGhzcFNBc1BPa1NBQUEuIiwic3ViIjoiMTg3NTBmMGUtYjNlZi00ZDlmLThhYzQtOTRlMDVkN2YzMzcwIiwidGlkIjoiODU5NzZkZjMtMjFhZS00MDIwLTkzY2EtNTEzNzYxYWFlMjhiIiwidXRpIjoicTFJYUhHUTJaRU9Penl3VEV4cHRBQSIsInZlciI6IjEuMCIsInhtc190Y2R0IjoxMzg0OTY4OTc4fQ.srs9TB3X3AVq8DmJc71DGsC6X42Qej5fZrpR3XgWM9NA1Lpuza2qih3c9UJ6Aqoy2xsucnpGGoYP5geEDgQ8tr634v5XQM8aKb2dMwv0dzK9gR1Ru2GTv28XAczj07ADQL5g0rEascFH1IC-SEQPbwnPTAnN8lc2mWchD4OKv9llIj0QY4VI7XTQ-9LXnJmveCrQs7RzAS-a02CGALH5tjvEgw57MeTZSsbHh70ObN93tpVsJ3yH1XP4aiOhEUpRMKbweZlBYyCfKHcSXWAZihsQ3iUZmn-WhRcAjbPfN41Dea0FFSK70RdSuuC0iU_vWFiJDx8bsS0ap0yRFKvxSA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://management.azure.com/subscriptions/e24382eb-137e-4f22-9b95-42dd080d8a79/resourceGroups/user33a/providers/Microsoft.HDInsight/clusters/sparkuser33a?api-version=2018-06-01-preview",
+					"protocol": "https",
+					"host": [
+						"management",
+						"azure",
+						"com"
+					],
+					"path": [
+						"subscriptions",
+						"e24382eb-137e-4f22-9b95-42dd080d8a79",
+						"resourceGroups",
+						"user33a",
+						"providers",
+						"Microsoft.HDInsight",
+						"clusters",
+						"sparkuser33a"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2018-06-01-preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Hdi Clusters - Resource group",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyIsImtpZCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuYXp1cmUuY29tLyIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0Lzg1OTc2ZGYzLTIxYWUtNDAyMC05M2NhLTUxMzc2MWFhZTI4Yi8iLCJpYXQiOjE2MDA5MDIzMjAsIm5iZiI6MTYwMDkwMjMyMCwiZXhwIjoxNjAwOTA2MjIwLCJhaW8iOiJFMlJnWUhpczF1RjRRVnlsd28vMU92L1BZN1h2QVE9PSIsImFwcGlkIjoiYzkwODcyMjMtMDM3NS00YmI2LWJkMzgtNmNhNTIwMmMzY2U5IiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvODU5NzZkZjMtMjFhZS00MDIwLTkzY2EtNTEzNzYxYWFlMjhiLyIsIm9pZCI6IjE4NzUwZjBlLWIzZWYtNGQ5Zi04YWM0LTk0ZTA1ZDdmMzM3MCIsInJoIjoiMC5BQUFBODIyWGhhNGhJRUNUeWxFM1lhcmlpeU55Q01sMUE3Wkx2VGhzcFNBc1BPa1NBQUEuIiwic3ViIjoiMTg3NTBmMGUtYjNlZi00ZDlmLThhYzQtOTRlMDVkN2YzMzcwIiwidGlkIjoiODU5NzZkZjMtMjFhZS00MDIwLTkzY2EtNTEzNzYxYWFlMjhiIiwidXRpIjoicTFJYUhHUTJaRU9Penl3VEV4cHRBQSIsInZlciI6IjEuMCIsInhtc190Y2R0IjoxMzg0OTY4OTc4fQ.srs9TB3X3AVq8DmJc71DGsC6X42Qej5fZrpR3XgWM9NA1Lpuza2qih3c9UJ6Aqoy2xsucnpGGoYP5geEDgQ8tr634v5XQM8aKb2dMwv0dzK9gR1Ru2GTv28XAczj07ADQL5g0rEascFH1IC-SEQPbwnPTAnN8lc2mWchD4OKv9llIj0QY4VI7XTQ-9LXnJmveCrQs7RzAS-a02CGALH5tjvEgw57MeTZSsbHh70ObN93tpVsJ3yH1XP4aiOhEUpRMKbweZlBYyCfKHcSXWAZihsQ3iUZmn-WhRcAjbPfN41Dea0FFSK70RdSuuC0iU_vWFiJDx8bsS0ap0yRFKvxSA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tags\": {\r\n    \"key1\": \"user98\"\r\n  },\r\n  \"location\" : \"eastus\",\r\n  \"properties\": {\r\n    \"clusterVersion\": \"3.6\",\r\n    \"osType\": \"Linux\",\r\n    \"tier\": \"Standard\",\r\n    \"clusterDefinition\": {\r\n      \"kind\": \"Hadoop\",\r\n      \"configurations\": {\r\n        \"gateway\": {\r\n          \"restAuthCredential.isEnabled\": \"true\",\r\n          \"restAuthCredential.username\": \"admin\",\r\n          \"restAuthCredential.password\": \"P2ssw0rd1234#\"\r\n        }\r\n      }\r\n    },\r\n    \"storageProfile\": {\r\n      \"storageaccounts\": [\r\n        {\r\n          \"name\": \"user98stor.dfs.core.windows.net\",\r\n          \"isDefault\": true,\r\n          \"fileSystem\": \"default\",\r\n          \"key\": \"J7Wnqe5AH9avOo0rZ96HjDsRaGVOX0Oouvxtco1gtAbF60AKifOY1tlV6OCii80cDTWFVtaUKXqLiHcBK36WRQ==\"\r\n        }\r\n      ]\r\n    },\r\n    \"computeProfile\": {\r\n      \"roles\": [\r\n        {\r\n          \"name\": \"headnode\",\r\n          \"minInstanceCount\": 1,\r\n          \"targetInstanceCount\": 2,\r\n          \"hardwareProfile\": {\r\n            \"vmSize\": \"Standard_D3_V2\"\r\n          },\r\n          \"osProfile\": {\r\n            \"linuxOperatingSystemProfile\": {\r\n              \"username\": \"sshuser\",\r\n              \"password\": \"P2ssw0rd1234#\"\r\n            }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"workernode\",\r\n          \"minInstanceCount\": 1,\r\n          \"targetInstanceCount\": 4,\r\n          \"hardwareProfile\": {\r\n            \"vmSize\": \"Standard_D3_V2\"\r\n          },\r\n          \"osProfile\": {\r\n            \"linuxOperatingSystemProfile\": {\r\n              \"username\": \"sshuser\",\r\n              \"password\": \"P2ssw0rd1234#\"\r\n            }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"zookeepernode\",\r\n          \"minInstanceCount\": 1,\r\n          \"targetInstanceCount\": 3,\r\n          \"hardwareProfile\": {\r\n            \"vmSize\": \"Small\"\r\n          },\r\n          \"osProfile\": {\r\n            \"linuxOperatingSystemProfile\": {\r\n              \"username\": \"sshuser\",\r\n              \"password\": \"P2ssw0rd1234#\"\r\n            }\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://management.azure.com/subscriptions/e24382eb-137e-4f22-9b95-42dd080d8a79/resourceGroups/user98/providers/Microsoft.HDInsight/clusters/user98?api-version=2018-06-01-preview",
+					"protocol": "https",
+					"host": [
+						"management",
+						"azure",
+						"com"
+					],
+					"path": [
+						"subscriptions",
+						"e24382eb-137e-4f22-9b95-42dd080d8a79",
+						"resourceGroups",
+						"user98",
+						"providers",
+						"Microsoft.HDInsight",
+						"clusters",
+						"user98"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2018-06-01-preview"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

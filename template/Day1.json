@@ -1,0 +1,370 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+   "uniqueName": {
+      "type": "string",
+	  "defaultValue": "msdataai",
+      "metadata": {
+        "description": "The name of the Spark cluster to create. This must be a unique name."
+      }
+    },
+    "clusterLoginUserName": {
+      "type": "string",
+      "defaultValue": "admin",
+      "metadata": {
+        "description": "These credentials can be used to submit jobs to the clusters and to log into clusters dashboards."
+      }
+    },
+    "clusterLoginPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The password must be at least 10 characters in length and must contain at least one digit, one non-alphanumeric character, and one upper or lower case letter."
+      }
+    },
+    "sshUserName": {
+      "type": "string",
+      "defaultValue": "sshuser",
+      "metadata": {
+        "description": "These credentials can be used to remotely access the clusters."
+      }
+    },
+    "sshPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The password must be at least 10 characters in length and must contain at least one digit, one non-alphanumeric character, and one upper or lower case letter."
+      }
+    }	
+  },
+  "variables": {
+    "storageAccountName": {
+      "name": "[concat(parameters('uniqueName'), 'stor')]",
+      "type": "Standard_LRS"
+    },
+	"mlstorageAccountName": {
+      "name": "[concat(parameters('uniqueName'), 'mlstor')]",
+      "type": "Standard_LRS"
+    },
+    "networkConfig": {
+      "name": "[concat(parameters('uniqueName'),'nc')]",
+      "addressPrefix": "10.0.0.0/16"
+    },
+    "subnetConfig": {
+      "name": "default",
+      "addressPrefix": "10.0.0.0/24"
+    },
+	"sparkClusterName": {
+      "name": "[concat('spark',parameters('uniqueName'))]"
+    },
+	"kafkaClusterName": {
+      "name": "[concat('kafka',parameters('uniqueName'))]"
+    },
+	"tenantId": "[subscription().tenantId]",
+	"keyvaultName": {
+      "name": "[concat(parameters('uniqueName'), 'kv')]"
+    },
+	"aiName": {
+      "name": "[concat(parameters('uniqueName'), 'ai')]"
+    },
+	"mlName": {
+      "name": "[concat(parameters('uniqueName'), 'aml')]"
+    },
+	"rgName": {
+	  "name": "[resourceGroup().name]"
+	},
+	"mlsa": "[resourceId(variables('rgName').name, 'Microsoft.Storage/storageAccounts', variables('mlstorageAccountName').name)]",
+    "mlkv": "[resourceId(variables('rgName').name, 'Microsoft.KeyVault/vaults', variables('keyVaultName').name)]",
+    "mlai": "[resourceId(variables('rgName').name, 'Microsoft.Insights/components', variables('aiName').name)]"
+  },
+  "resources": [
+    {
+      "name": "[variables('networkConfig').name]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2017-06-01",
+      "dependsOn": [ ],
+      "tags": { },
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('networkConfig').addressPrefix]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('subnetConfig').name]",
+            "properties": {
+              "addressPrefix": "[variables('subnetConfig').addressPrefix]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[variables('storageAccountName').name]",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-01-01",
+      "sku": {
+          "name": "[variables('storageAccountName').type]"
+      },
+      "kind": "Storage", 
+      "properties": {}
+    },
+	{
+		"type": "Microsoft.Storage/storageAccounts",
+		"apiVersion": "2019-04-01",
+		"name": "[variables('mlstorageAccountName').name]",
+		"location": "[resourceGroup().location]",
+		"sku": {
+			"name": "[variables('storageAccountName').type]"
+		},
+		"kind": "StorageV2",
+		"properties": {
+			"encryption": {
+				"services": {
+					"blob": {
+						"enabled": true
+					},
+					"file": {
+						"enabled": true
+					}
+				},
+				"keySource": "Microsoft.Storage"
+			},
+			"supportsHttpsTrafficOnly": true
+		}
+	},
+	{
+		"type": "Microsoft.KeyVault/vaults",
+		"apiVersion": "2018-02-14",
+		"name": "[variables('keyvaultName').name]",
+		"location": "[resourceGroup().location]",
+		"properties": {
+			"tenantId": "[variables('tenantId')]",
+			"sku": {
+				"name": "standard",
+				"family": "A"
+			},
+			"accessPolicies": []
+		}
+	},
+	{
+		"type": "Microsoft.Insights/components",
+		"apiVersion": "2018-05-01-preview",
+		"name": "[variables('aiName').name]",
+		"location": "[resourceGroup().location]",
+		"kind": "web",
+		"properties": {
+			"Application_Type": "web"
+		}
+	},
+	{
+		"type": "Microsoft.MachineLearningServices/workspaces",
+		"apiVersion": "2020-04-01",
+		"name": "[variables('mlName').name]",
+		"location": "[resourceGroup().location]",
+		"dependsOn": [
+			"[variables('mlsa')]",
+            "[variables('mlkv')]",
+            "[variables('mlai')]"
+		],
+		"sku": {
+			"tier": "enterprise",
+			"name": "enterprise"
+		},
+		"identity": {
+			"type": "systemAssigned"
+		},
+		"properties": {
+				"friendlyName": "[variables('mlName').name]",
+                "storageAccount": "[variables('mlsa')]",
+                "keyVault": "[variables('mlkv')]",
+                "applicationInsights": "[variables('mlai')]",
+                "containerRegistry": "[json('null')]",
+                "encryption": {
+                    "status": "Disabled"
+                },
+                "hbiWorkspace": "false"
+		}
+	},
+    {
+      "name": "[variables('sparkClusterName').name]",
+      "type": "Microsoft.HDInsight/clusters",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-03-01-preview",
+      "dependsOn": [
+        "[concat('Microsoft.Storage/storageAccounts/',variables('storageAccountName').name)]",
+        "[concat('Microsoft.Network/virtualNetworks/',variables('networkConfig').name)]"
+      ],
+      "tags": { },
+      "properties": {
+        "clusterVersion": "3.6",
+        "osType": "Linux",
+        "clusterDefinition": {
+          "kind": "spark",
+          "componentVersion": {
+            "Spark": "2.2"
+          },
+          "configurations": {
+            "gateway": {
+              "restAuthCredential.isEnabled": true,
+              "restAuthCredential.username": "[parameters('clusterLoginUserName')]",
+              "restAuthCredential.password": "[parameters('clusterLoginPassword')]"
+            }
+          }
+        },
+        "storageProfile": {
+          "storageaccounts": [
+            {
+              "name": "[replace(replace(concat(reference(concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName').name), '2016-01-01').primaryEndpoints.blob),'https:',''),'/','')]",
+              "isDefault": true,
+              "container": "hdidatalake",
+              "key": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName').name), '2016-01-01').keys[0].value]"
+            }
+          ]
+        },
+        "computeProfile": {
+          "roles": [
+            {
+              "name": "headnode",
+              "targetInstanceCount": "2",
+              "hardwareProfile": {
+                "vmSize": "Standard_D12_v2"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "[parameters('sshUserName')]",
+                  "password": "[parameters('sshPassword')]"
+                }
+              },
+              "virtualNetworkProfile": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks', variables('networkConfig').name)]",
+                "subnet": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('networkConfig').name), '/subnets/', variables('subnetConfig').name)]"
+              }
+            },
+            {
+              "name": "workernode",
+              "targetInstanceCount": 4,
+              "hardwareProfile": {
+                "vmSize": "Standard_D13_v2"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "[parameters('sshUserName')]",
+                  "password": "[parameters('sshPassword')]"
+                }
+              },
+              "virtualNetworkProfile": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks', variables('networkConfig').name)]",
+                "subnet": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('networkConfig').name), '/subnets/', variables('subnetConfig').name)]"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "[variables('kafkaClusterName').name]",
+      "type": "Microsoft.HDInsight/clusters",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-03-01-preview",
+      "dependsOn": [
+        "[concat('Microsoft.Storage/storageAccounts/',variables('storageAccountName').name)]",
+        "[concat('Microsoft.Network/virtualNetworks/',variables('networkConfig').name)]"
+      ],
+      "tags": { },
+      "properties": {
+        "clusterVersion": "3.6",
+        "osType": "Linux",
+        "clusterDefinition": {
+          "kind": "kafka",
+
+          "configurations": {
+            "gateway": {
+              "restAuthCredential.isEnabled": true,
+              "restAuthCredential.username": "[parameters('clusterLoginUserName')]",
+              "restAuthCredential.password": "[parameters('clusterLoginPassword')]"
+            }
+          }
+        },
+        "storageProfile": {
+          "storageaccounts": [
+            {
+              "name": "[replace(replace(concat(reference(concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName').name), '2016-01-01').primaryEndpoints.blob),'https:',''),'/','')]",
+              "isDefault": true,
+              "container": "hdidatalake",
+              "key": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName').name), '2016-01-01').keys[0].value]"
+            }
+          ]
+        },
+        "computeProfile": {
+          "roles": [
+            {
+              "name": "headnode",
+              "targetInstanceCount": "2",
+              "hardwareProfile": {
+                "vmSize": "Standard_D12_v2"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "[parameters('sshUserName')]",
+                  "password": "[parameters('sshPassword')]"
+                }
+              },
+              "virtualNetworkProfile": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks', variables('networkConfig').name)]",
+                "subnet": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('networkConfig').name), '/subnets/', variables('subnetConfig').name)]"
+              }
+            },
+            {
+              "name": "workernode",
+              "targetInstanceCount": 3,
+              "hardwareProfile": {
+                "vmSize": "Standard_D13_v2"
+              },
+              "dataDisksGroups": [
+                {
+                  "disksPerNode": 2
+                }
+              ],
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "[parameters('sshUserName')]",
+                  "password": "[parameters('sshPassword')]"
+                }
+              },
+              "virtualNetworkProfile": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks', variables('networkConfig').name)]",
+                "subnet": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('networkConfig').name), '/subnets/', variables('subnetConfig').name)]"
+              }
+            },
+            {
+              "name": "zookeepernode",
+              "targetInstanceCount": "3",
+              "hardwareProfile": {
+                "vmSize": "Standard_A2_v2"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "[parameters('sshUserName')]",
+                  "password": "[parameters('sshPassword')]"
+                }
+              },
+              "virtualNetworkProfile": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks', variables('networkConfig').name)]",
+                "subnet": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('networkConfig').name), '/subnets/', variables('subnetConfig').name)]"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "vnet": {
+      "type": "object",
+      "value": "[reference(resourceId('Microsoft.Network/virtualNetworks',variables('networkConfig').name))]"
+    }
+  }
+}
