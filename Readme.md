@@ -1,4 +1,48 @@
-# HDInsight Features & Capabilities
+# Table of Content
+[Abstract ](#abstract)
+
+[Target Audience ](#target-audience) 
+
+[Technologies](#technologies)
+
+[Objective](#objective)
+
+[HDInsight Features and Capabilities](#hdinsight-features-and-capabilities)
+
+[Workshop Architecture and Overview](#workshop-architecture-and-overview)
+   
+[Special Thanks](#special-thanks)   
+
+ # Abstract
+Big data analytics has evolved rapidly in the last decade. This evolution has also transpired a innovation in tooling resulting a large set of tools available for the enterprise data analytics and management teams. As part of highlighting the key pros and limitation in a tool chain, this particular workshop will focus on HDInsight has a central component of the design. At the end of the workshop the participants will be able to understand and implement simple end to end data analytics design using HDInsight and supported tooling. Further, this experience will help participants both Sales representatives and customers to identify workloads that might suit HDInsight and perform quick Demos/POCs. 
+
+Azure HDInsight is a cloud service that allows cost-effective data processing using open-source frameworks such as Hadoop, Spark, Hive, Storm, and Kafka, among others. Of all Azure’s cloud-based ETL technologies, HDInsight is the closest to an IaaS, since there is some amount of cluster management involved. Billing is on a per-minute basis, but activities can be scheduled on demand using Data Factory, even though this limits the use of storage to Blob Storage. Another key feature of HDInsight is that it maintains the ability of integrating to native azure services such Azure Machine Learning, data factory while allowing you to bring in/build your opensource tool chain.
+
+
+# Target Audience
+- Data Engineers 
+- Data analysts 
+- Machine learning engineers
+- Data and AI sales
+
+# Technologies 
+- HDInsight - Kafka
+- HDInsight – Machine Learning/R Server
+- HDInsight – Spark
+- Azure Machine Learning
+- Power BI
+- Azure Data Lake
+
+# Objective
+## Business Objectives 
+The key goal for the end enterprise business user is the ability to see the descriptive analytics of the entire disparate dataset as a single source of truth. This might allow them answer business questions such as “Average ride time in May 2013 for Yellow Taxis” or “Variation of ride volume by hour on weekdays vs weekends”. In addition, enterprise business users might want a dynamic dashboard that allows them the chop and slice their views at runtime. Further, end users might also want predictive analytics solutions such as “Probability of receiving a tip” or “Overall demand for taxis in a particular borough on a Sunday”. The final frontier for an enterprise user will be to get to prescriptive analytics from the dataset and generate recommendations such as dynamic fair pricing.  
+ 
+ 
+## Technical Objectives 
+The technical goals for the demo stem from the needs of the enterprise business user, the scale of the dataset and the differences in data profile across taxi types, years and month. In order to create a single source of truth (materialized view), for the entire enterprise, the data analytics solution should be able to homogenize the data across taxi types and time which can be fairly challenging for datasets this big with over 1.6 Billion records.  Additionally, to allow business users to dynamically slice and chop their views on run time, all queries should have very low latency. To support predictive and perspective analytics our solution should allow Machine learning to be applied to the entire data set. Further, the architecture for the solution should be scalable for future expansion and support Devops like continuous ingestion and production. 
+
+
+# HDInsight Features and Capabilities
 
 Azure HDInsight is a managed, full-spectrum, open-source analytics service in
 the cloud for enterprises. You can use open-source frameworks such as Hadoop,
@@ -82,7 +126,7 @@ languages. HDInsight offers the following cluster types:
 | [Apache Interactive Query](https://docs.microsoft.com/en-us/azure/hdinsight/interactive-query/apache-interactive-query-get-started) | In-memory caching for interactive and faster Hive queries. See [Use Interactive Query in HDInsight](https://docs.microsoft.com/en-us/azure/hdinsight/interactive-query/apache-interactive-query-get-started).                                                                                                                                 |
 | [Apache Kafka](https://docs.microsoft.com/en-us/azure/hdinsight/kafka/apache-kafka-introduction)                                    | An open-source platform that's used for building streaming data pipelines and applications. Kafka also provides message-queue functionality that allows you to publish and subscribe to data streams. See [Introduction to Apache Kafka on HDInsight](https://docs.microsoft.com/en-us/azure/hdinsight/kafka/apache-kafka-introduction).      |
 
-# Workshop Architecture & Overview
+# Workshop Architecture and Overview
 
 In this workshop, in an end-to-end scenario, we use an [Azure HDInsight Hadoop
 cluster](https://azure.microsoft.com/services/hdinsight/)s to store, explore,
@@ -1673,3 +1717,9 @@ HDInsight cluster. And any other resources associated with the resource group.
     the **More** button (...) on the right side of the listing.
 
 -   Select **Delete resource group**, and then confirm.
+
+# Special Thanks
+- [Shekhar Kumar](https://github.com/shkumar64)
+- [Sha Kanjoor Anand](https://github.com/shakanand)
+- [Shashi Bhusan]
+- [Arunansu Pattanayak](https://github.com/arunansu)
